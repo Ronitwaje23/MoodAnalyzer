@@ -8,7 +8,7 @@ namespace MoodAnalyzer
 {
     public class AnalyzeMood
     {
-
+        //variable
         public string message;
         //parameterized constructor
         public AnalyzeMood(string message)
@@ -18,13 +18,21 @@ namespace MoodAnalyzer
         //Method to return the type of Mood
         public string Mood()
         {
-            if (message.ToLower().Contains("happy"))
+            try
             {
-                return "happy";
+                if (message.ToLower().Contains("happy"))
+                {
+                    return "happy";
+                }
+                else
+                {
+                    return "sad";
+                }
             }
-            else
+            catch (NullReferenceException ex)
             {
-                return "sad";
+                Console.WriteLine(ex.Message);
+                return "happy";
             }
         }
     }
