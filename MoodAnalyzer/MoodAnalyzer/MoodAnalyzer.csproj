@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{04EC4EC6-3495-49C5-8967-0C0249908B3B}</ProjectGuid>
+    <ProjectGuid>{6490E046-0490-4D1A-AFE3-10BD6AA96D97}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>MoodAnalyzer</RootNamespace>
     <AssemblyName>MoodAnalyzer</AssemblyName>
@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnalyzeMood.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
