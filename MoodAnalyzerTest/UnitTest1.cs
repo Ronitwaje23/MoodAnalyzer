@@ -75,5 +75,47 @@ namespace MoodAnalyzerTest
                 Console.WriteLine("Worst Case Exception :" + ex);
             }
         }
+        /// <summary>
+        /// TC-4.1 Returns the mood analyser object
+        /// </summary>
+        [TestMethod]
+        public void GivenMoodAnalyserReflection_ShouldReturnObject()
+        {
+            object expected = new AnalyzeMood();
+            object actual = MoodAnalyzerFactory.CreateMoodAnalyse("MoodAnalyzer.AnalyzeMood", "AnalyzeMood");
+            expected.Equals(actual);
+        }
+        /// <summary>
+        /// TC-4.2 should throw NO_SUCH_CLASS exception.
+        /// </summary>
+        [TestMethod]
+        public void GivenClassNameImproper_ShouldReturnMoodAnalysisException()
+        {
+            string expected = "Class not found";
+            try
+            {
+                object actual = MoodAnalyzerFactory.CreateMoodAnalyse("Mood.AnalyzeMood", "AnalyzeMood");
+            }
+            catch (MoodAnalyzerException e)
+            {
+                Assert.AreEqual(expected, e.Message);
+            }
+        }
+        /// <summary>
+        /// TC-4.3 should throw NO_SUCH_CONTRUCTOR exception.
+        /// </summary>
+        [TestMethod]
+        public void GivenConstructorNameImproper_ShouldReturnMoodAnalysisException()
+        {
+            string expected = "Constructor not found";
+            try
+            {
+                object actual = MoodAnalyzerFactory.CreateMoodAnalyse("MoodAnalyzer.AnalyzeMood", "MoodAnalyzer");
+            }
+            catch (MoodAnalyzerException e)
+            {
+                Assert.AreEqual(expected, e.Message);
+            }
+        }
     }
 }
