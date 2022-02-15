@@ -6,6 +6,7 @@ using System;
 namespace MoodAnalyzerTest
 {
     [TestClass]
+
     public class UnitTest1
     {
         [TestMethod]
@@ -84,7 +85,7 @@ namespace MoodAnalyzerTest
         public void GivenMoodAnalyserReflection_ShouldReturnObject()
         {
             object expected = new AnalyzeMood();
-            object actual = MoodAnalyzerReflector.CreateMoodAnalyse("MoodAnalyzer.AnalyzeMood", "AnalyzeMood");
+            object actual = MoodAnalyzerFactory.CreateMoodAnalyse("MoodAnalyzer.AnalyzeMood", "AnalyzeMood");
             expected.Equals(actual);
         }
         /// <summary>
@@ -97,7 +98,7 @@ namespace MoodAnalyzerTest
             string expected = "Class not found";
             try
             {
-                object actual = MoodAnalyzerReflector.CreateMoodAnalyse("Mood.AnalyzeMood", "AnalyzeMood");
+                object actual = MoodAnalyzerFactory.CreateMoodAnalyse("Mood.AnalyzeMood", "AnalyzeMood");
             }
             catch (MoodAnalyzerException e)
             {
@@ -114,7 +115,7 @@ namespace MoodAnalyzerTest
             string expected = "Constructor not found";
             try
             {
-                object actual = MoodAnalyzerReflector.CreateMoodAnalyse("MoodAnalyzer.AnalyzeMood", "MoodAnalyzer");
+                object actual = MoodAnalyzerFactory.CreateMoodAnalyse("MoodAnalyzer.AnalyzeMood", "MoodAnalyzer");
             }
             catch (MoodAnalyzerException e)
             {
@@ -129,7 +130,7 @@ namespace MoodAnalyzerTest
         public void GivenMoodAnalyserParameterizedConstructor_ShouldReturnObject()
         {
             object expected = new AnalyzeMood("I am Parameter constructor");
-            object actual = MoodAnalyzerReflector.CreateMoodAnalyserParameterizedConstructor("MoodAnalyzer.AnalyzeMood", "AnalyzeMood", "I am Parameter constructor");
+            object actual = MoodAnalyzerFactory.CreateMoodAnalyserParameterizedConstructor("MoodAnalyzer.AnalyzeMood", "AnalyzeMood", "I am Parameter constructor");
             expected.Equals(actual);
         }
         /// <summary>
@@ -142,7 +143,7 @@ namespace MoodAnalyzerTest
             string expected = "Class not found";
             try
             {
-                object actual = MoodAnalyzerReflector.CreateMoodAnalyserParameterizedConstructor("MoodAnalyser.AnalyzeMood", "AnalyzeMood", "I am Parameter constructor");
+                object actual = MoodAnalyzerFactory.CreateMoodAnalyserParameterizedConstructor("MoodAnalyser.AnalyzeMood", "AnalyzeMood", "I am Parameter constructor");
             }
             catch (MoodAnalyzerException e)
             {
@@ -159,7 +160,7 @@ namespace MoodAnalyzerTest
             string expected = "Constructor not found";
             try
             {
-                object actual = MoodAnalyzerReflector.CreateMoodAnalyserParameterizedConstructor("MoodAnalyzer.AnalyzeMood", "AnalyzeMod", "I am Parameter constructor");
+                object actual = MoodAnalyzerFactory.CreateMoodAnalyserParameterizedConstructor("MoodAnalyzer.AnalyzeMood", "AnalyzeMod", "I am Parameter constructor");
             }
             catch (MoodAnalyzerException e)
             {
@@ -174,37 +175,8 @@ namespace MoodAnalyzerTest
         public void GivenMoodAnalyserOptionalVarible_ShouldReturnObject()
         {
             object expected = new AnalyzeMood("I am Parameter constructor");
-            object actual = MoodAnalyzerReflector.CreateMoodAnalyserOptionalVariable("MoodAnalyserProblem.MoodAnalyser", "MoodAnalyser", "I am Parameter constructor");
+            object actual = MoodAnalyzerFactory.CreateMoodAnalyserOptionalVariable("MoodAnalyserProblem.MoodAnalyser", "MoodAnalyser", "I am Parameter constructor");
             expected.Equals(actual);
-        }
-        /// <summary>
-        /// TC-6.1 Invokes the method using reflection and should return happy
-        /// </summary>
-        [TestMethod]
-        [TestCategory("Reflection")]
-        public void InvokeMethodReflection_ShouldRetunHappy()
-        {
-            string expected = "happy";
-            string actual = MoodAnalyzerReflector.InvokeAnalyseMood("I am happy", "Mood");
-            expected.Equals(actual);
-        }
-        /// <summary>
-        /// TC-6.2  should throw method not found exception.
-        /// </summary>
-        [TestMethod]
-        [TestCategory("Reflection")]
-        public void GivenMethodnameImproper_ShouldReturnMoodAnalysisException()
-        {
-            string expected = "No method found";
-            try
-            {
-                string actual = MoodAnalyzerReflector.InvokeAnalyseMood("I am happy", "MoodAnalyse");
-                expected.Equals(actual);
-            }
-            catch (MoodAnalyzerException ex)
-            {
-                Assert.AreEqual(expected, ex.Message);
-            }
         }
     }
 }
