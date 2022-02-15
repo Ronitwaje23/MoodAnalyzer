@@ -2,6 +2,7 @@
 using MoodAnalyzer;
 using System;
 
+
 namespace MoodAnalyzerTest
 {
     [TestClass]
@@ -79,6 +80,7 @@ namespace MoodAnalyzerTest
         /// TC-4.1 Returns the mood analyser object
         /// </summary>
         [TestMethod]
+        [TestCategory("Reflection")]
         public void GivenMoodAnalyserReflection_ShouldReturnObject()
         {
             object expected = new AnalyzeMood();
@@ -89,6 +91,7 @@ namespace MoodAnalyzerTest
         /// TC-4.2 should throw NO_SUCH_CLASS exception.
         /// </summary>
         [TestMethod]
+        [TestCategory("Reflection")]
         public void GivenClassNameImproper_ShouldReturnMoodAnalysisException()
         {
             string expected = "Class not found";
@@ -105,6 +108,7 @@ namespace MoodAnalyzerTest
         /// TC-4.3 should throw NO_SUCH_CONTRUCTOR exception.
         /// </summary>
         [TestMethod]
+        [TestCategory("Reflection")]
         public void GivenConstructorNameImproper_ShouldReturnMoodAnalysisException()
         {
             string expected = "Constructor not found";
@@ -116,6 +120,62 @@ namespace MoodAnalyzerTest
             {
                 Assert.AreEqual(expected, e.Message);
             }
+        }
+        /// <summary>
+        /// TC-5.1 Returns the mood analyser object with parameterized constructor.
+        /// </summary>
+        [TestMethod]
+        [TestCategory("Reflection")]
+        public void GivenMoodAnalyserParameterizedConstructor_ShouldReturnObject()
+        {
+            object expected = new AnalyzeMood("I am Parameter constructor");
+            object actual = MoodAnalyzerFactory.CreateMoodAnalyserParameterizedConstructor("MoodAnalyzer.AnalyzeMood", "AnalyzeMood", "I am Parameter constructor");
+            expected.Equals(actual);
+        }
+        /// <summary>
+        /// TC-5.2 should throw NO_SUCH_CLASS exception with parameterized constructor.
+        /// </summary>
+        [TestMethod]
+        [TestCategory("Reflection")]
+        public void GivenClassNameImproperParameterizedConstructor_ShouldReturnMoodAnalysisException()
+        {
+            string expected = "Class not found";
+            try
+            {
+                object actual = MoodAnalyzerFactory.CreateMoodAnalyserParameterizedConstructor("MoodAnalyser.AnalyzeMood", "AnalyzeMood", "I am Parameter constructor");
+            }
+            catch (MoodAnalyzerException e)
+            {
+                Assert.AreEqual(expected, e.Message);
+            }
+        }
+        /// <summary>
+        /// TC-5.3 should throw NO_SUCH_CONSTRUCTOR exception with parameterized constructor.
+        /// </summary>
+        [TestMethod]
+        [TestCategory("Reflection")]
+        public void GivenImproperParameterizedConstructorName_ShouldReturnMoodAnalysisException()
+        {
+            string expected = "Constructor not found";
+            try
+            {
+                object actual = MoodAnalyzerFactory.CreateMoodAnalyserParameterizedConstructor("MoodAnalyzer.AnalyzeMood", "AnalyzeMod", "I am Parameter constructor");
+            }
+            catch (MoodAnalyzerException e)
+            {
+                Assert.AreEqual(expected, e.Message);
+            }
+        }
+        /// <summary>
+        /// UC5-Refactor dry principle
+        /// </summary>
+        [TestMethod]
+        [TestCategory("Reflection")]
+        public void GivenMoodAnalyserOptionalVarible_ShouldReturnObject()
+        {
+            object expected = new AnalyzeMood("I am Parameter constructor");
+            object actual = MoodAnalyzerFactory.CreateMoodAnalyserOptionalVariable("MoodAnalyserProblem.MoodAnalyser", "MoodAnalyser", "I am Parameter constructor");
+            expected.Equals(actual);
         }
     }
 }

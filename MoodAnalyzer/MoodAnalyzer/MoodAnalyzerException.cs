@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 namespace MoodAnalyzer
 {
-    [Serializable]
+    //Inheriting base Exception Class.
     public class MoodAnalyzerException : Exception
     {
-
         public ExceptionType type;
         //Enumeration
         public enum ExceptionType
